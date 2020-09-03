@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import PubSub from 'pubsub-js'
 import CommentAdd from "../comment-add/comment-add";
 import CommentList from "../comment-list/comment-list";
-
 export default class App extends Component {
     // constructor(props) {
     //     super(props);
@@ -20,13 +18,6 @@ export default class App extends Component {
             {username: 'Jack', content: 'React is difficult'},
         ]
     }
-    componentDidMount() {
-        //subscribe message
-        PubSub.subscribe('deleteComment', (msg, index) => {
-            this.deleteComment(index)
-        })
-    }
-
     //添加评论
     addComment = (comment) => {
         const {comments} = this.state
@@ -58,7 +49,7 @@ export default class App extends Component {
 
                 <div className= "container">
                     <CommentAdd addComment = {this.addComment}/>
-                    <CommentList comments={comments}/>
+                    <CommentList comments = {comments} deleteComment = {this.deleteComment}/>
                 </div>
             </div>
         )

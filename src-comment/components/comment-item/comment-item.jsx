@@ -1,20 +1,20 @@
 import React, {Component} from "react"
 import PropTypes from 'prop-types'
-import PubSub from 'pubsub-js'
 
 import './commentItem.css'
 
 export default class CommentItem extends Component {
     static propTypes = {
         comment: PropTypes.object.isRequired,
+        deleteComment: PropTypes.func.isRequired,
         index: PropTypes.number.isRequired,
     }
     handleDelete = () => {
-        const {comment, index} = this.props
+        const {comment, deleteComment, index} = this.props
         //提示
         if (window.confirm('delete ${comment.username}  comments?')) {
-            //confirm deletion
-            PubSub.publish('deleteComment', index)
+            //确定后删除
+            deleteComment(index)
         }
 
     }
